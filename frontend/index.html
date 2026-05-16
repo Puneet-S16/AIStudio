@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous UI Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <!-- Monaco Editor loader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>AI Studio</h2>
+                <span class="status-indicator"></span>
+            </div>
+            
+            <div class="input-section">
+                <textarea id="prompt-input" placeholder="Describe the website you want to build..." rows="4"></textarea>
+                <button id="generate-btn">
+                    <span>Generate</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+
+            <div class="logs-section">
+                <h3>Agent Activity</h3>
+                <div id="logs-container" class="logs-container">
+                    <div class="log-entry system-log">System ready. Waiting for prompt.</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Workspace -->
+        <main class="workspace">
+            <header class="workspace-header">
+                <div class="tabs">
+                    <button class="tab active" data-target="preview">Preview</button>
+                    <button class="tab" data-target="code">Code</button>
+                </div>
+                <div class="actions">
+                    <button id="deploy-btn" class="secondary-btn">Deploy</button>
+                </div>
+            </header>
+
+            <div class="workspace-content">
+                <!-- Preview Panel -->
+                <div id="preview-panel" class="panel active">
+                    <div class="browser-frame">
+                        <div class="browser-header">
+                            <div class="dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="address-bar">localhost:8000/preview</div>
+                            <button id="refresh-preview" title="Refresh Preview">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                            </button>
+                        </div>
+                        <iframe id="preview-iframe" src="/preview/index.html" sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                </div>
+
+                <!-- Code Panel -->
+                <div id="code-panel" class="panel">
+                    <div class="code-header">
+                        <select id="file-selector">
+                            <option value="html">index.html</option>
+                            <option value="css">styles.css</option>
+                            <option value="js">script.js</option>
+                        </select>
+                    </div>
+                    <div id="editor-container"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Deployment Modal -->
+    <div id="deploy-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Deploy to GitHub</h3>
+                <button id="close-modal-btn" class="icon-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Deploy your generated application directly to GitHub Pages.</p>
+                <div class="input-group">
+                    <label for="repo-name">Repository Name</label>
+                    <input type="text" id="repo-name" placeholder="e.g. my-awesome-app" />
+                </div>
+                <div id="deploy-status" class="deploy-status hidden">
+                    <span class="loader"></span>
+                    <span class="status-text">Creating repository...</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-deploy-btn" class="secondary-btn">Cancel</button>
+                <button id="confirm-deploy-btn" class="primary-btn">Deploy Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

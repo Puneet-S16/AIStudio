@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+websockets
+langgraph
+langchain-groq
+langchain-core
+playwright
+python-dotenv
+PyGithub
