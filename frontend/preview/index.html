@@ -1,37 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuantumFlow - AI-Powered Decision Engine</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
-    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-<div class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white p-4 md:p-8 flex flex-col items-center">
-  <div class="max-w-4xl w-full bg-black/30 backdrop-blur-lg rounded-3xl p-6 md:p-10 border border-purple-500/20 shadow-2xl">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8 text-center">
-      JSON Validator & Debugger
-    </h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="space-y-4">
-        <label class="block text-sm font-medium text-gray-300">Paste your JSON</label>
-        <textarea id="jsonInput" class="w-full h-64 p-4 rounded-xl bg-gray-800 text-white text-sm font-mono focus:ring-2 focus:ring-purple-500 focus:border-transparent border border-gray-700 resize-none" placeholder="{"key":"value"}"></textarea>
-        <button onclick="validateJSON()" class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-xl text-white font-bold transition-all duration-300 transform hover:scale-105 shadow-lg">
-          Validate JSON
-        </button>
-      </div>
-      <div class="space-y-4">
-        <label class="block text-sm font-medium text-gray-300">Validation Results</label>
-        <div id="result" class="h-64 p-4 rounded-xl bg-gray-800 text-gray-300 text-sm font-mono overflow-auto border border-gray-700"></div>
-        <div id="errorHighlight" class="h-64 p-4 rounded-xl bg-gray-800 text-red-400 text-sm font-mono overflow-auto border border-red-500/30"></div>
+<body class="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#09090b] to-[#09090b] text-white font-sans">
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col justify-center px-4">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-emerald-400 mb-6">
+        QuantumFlow: The Future of Intelligent Decision-Making
+      </h1>
+      <p class="text-xl text-slate-300 max-w-3xl mb-10">
+        Revolutionize your business operations with our AI-powered decision engine that processes 100,000+ data points per second. From predictive analytics to real-time optimization, QuantumFlow delivers actionable insights that drive exponential growth.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="#demo" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 transform hover:-translate-y-1">
+          <span class="font-medium">Request Demo</span>
+        </a>
+        <a href="#pricing" class="px-8 py-4 border-2 border-white/20 rounded-lg hover:bg-white/10 transition-all duration-300">
+          <span class="font-medium">Pricing</span>
+        </a>
       </div>
     </div>
-  </div>
-</div>
-<script src="script.js"></script>
-</body>
-</html>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-slate-900/50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Why Choose QuantumFlow?</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 hover:shadow-2xl transition-all duration-300">
+          <div class="text-emerald-400 text-4xl mb-4"><span class="material-icons">insights</span></div>
+          <h3 class="text-xl font-bold mb-3">Predictive Analytics</h3>
+          <p class="text-slate-300">
+            Leverage machine learning models trained on 10+ years of industry data to predict market trends with 98.7% accuracy. Our AI identifies patterns invisible to human analysts.
+          </p>
+        </div>
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 hover:shadow-2xl transition-all duration-300">
+          <div class="text-blue-400 text-4xl mb-4"><span class="material-icons">tune</span></div>
+          <h3 class="text-xl font-bold mb-3">Real-Time Optimization</h3>
+          <p class="text-slate-300">
+            Automatically adjust business parameters in milliseconds. From supply chain logistics to financial portfolios, we optimize for maximum ROI in dynamic environments.
+          </p>
+        </div>
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 hover:shadow-2xl transition-all duration-300">
+          <div class="text-purple-400 text-4xl mb-4"><span class="material-icons">security</span></div>
+          <h3 class="text-xl font-bold mb-3">Quantum-Secure</h3>
+          <p class="text-slate-300">
+            Military-grade encryption with quantum-resistant algorithms. Your data is protected by the same security protocols used by NASA and CERN.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Trusted by Industry Leaders</h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8">
+          <div class="flex items-center mb-4">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80" alt="CEO" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <p class="font-bold">Sarah Chen</p>
+              <p class="text-sm text-slate-400">CEO, TechNova Solutions</p>
+            </div>
+          </div>
+          <p class="text-slate-300 italic">
+            "QuantumFlow transformed our decision-making process. We've seen a 300% increase in operational efficiency since implementation. The predictive models are so accurate, we now outperform competitors by 40% in quarterly forecasts."
+          </p>
+        </div>
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8">
+          <div class="flex items-center mb-4">
+            <img src="https://images.unsplash.com/photo-1531427186685-396ac7efeb97?auto=format&fit=crop&w=800&q=80" alt="CTO" class="w-12 h-12 rounded-full mr-4" />
+            <div>
+              <p class="font-bold">Michael Rodriguez</p>
+              <p class="text-sm text-slate-400">CTO, FinTech Global</p>
+            </div>
+          </div>
+          <p class="text-slate-300 italic">
+            "The real-time optimization feature saved us $2.1M in supply chain costs last quarter. Our team can focus on strategic initiatives while QuantumFlow handles the complex calculations."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-slate-900/30">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Simple, Transparent Pricing</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-4">Starter</h3>
+          <p class="text-4xl font-extrabold mb-6">$499/month</p>
+          <ul class="text-slate-300 space-y-3 mb-8">
+            <li>• 100,000 data points/month</li>
+            <li>• Basic predictive models</li>
+            <li>• 24/7 support</li>
+            <li>• 3 user licenses</li>
+          </ul>
+          <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg hover:shadow-lg transition-all duration-300">
+            Get Started
+          </button>
+        </div>
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-4">Professional</h3>
+          <p class="text-4xl font-extrabold mb-6">$1,999/month</p>
+          <ul class="text-slate-300 space-y-3 mb-8">
+            <li>• 1,000,000 data points/month</li>
+            <li>• Advanced predictive models</li>
+            <li>• Real-time optimization</li>
+            <li>• 10 user licenses</li>
+            <li>• Dedicated account manager</li>
+          </ul>
+          <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg hover:shadow-lg transition-all duration-300">
+            Get Started
+          </button>
+        </div>
+        <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+          <h3 class="text-2xl font-bold mb-4">Enterprise</h3>
+          <p class="text-4xl font-extrabold mb-6">Custom Pricing</p>
+          <ul class="text-slate-300 space-y-3 mb-8">
+            <li>• Unlimited data points</li>
+            <li>• Custom AI models</li>
+            <li>• Quantum-secure infrastructure</li>
+            <li>• Unlimited user licenses</li>
+            <li>• 24/7 priority support</li>
+          </ul>
+          <button class="w-full py-3 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-lg hover:shadow-lg transition-all duration-300">
+            Contact Sales
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-6">
+          <h3 class="text-xl font-bold mb-2">How does QuantumFlow ensure data security?</h3>
+          <p class="text-slate-300">
+            We use quantum-resistant encryption algorithms and store data in decentralized blockchain nodes. All data is anonymized and processed in secure enclaves with hardware-based isolation.
+          </p>
+        </div>
+        <div class="mb-6">
+          <h3 class="text-xl font-bold mb-2">What industries can benefit from QuantumFlow?</h3>
+          <p class="text-slate-300">
+            Our platform is used by financial institutions, manufacturing companies, healthcare providers, and logistics firms. The AI models are adaptable to any industry with complex decision-making needs.
+          </p>
+        </div>
+        <div class="mb-6">
+          <h3 class="text-xl font-bold mb-2">What is the implementation timeline?</h3>
+          <p class="text-slate-300">
+            Implementation typically takes 4-6 weeks. Our team works closely with your organization to integrate QuantumFlow with your existing systems and train your team on optimal usage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900/80 py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">QuantumFlow</h3>
+          <p class="text-slate-400 text-sm">
+            Empowering businesses with AI-driven decision intelligence since 2023.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-3">Product</h4>
+          <ul class="space-y-2 text-slate-400 text-sm">
+            <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
+            <li><a href="#pricing" class="hover:text-white transition-colors">Pricing</a></li>
+            <li><a href="/dashboard" class="hover:text-white transition-colors">Dashboard</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-3">Company</h4>
+          <ul class="space-y-2 text-slate-400 text-sm">
+            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-3">Contact</h4>
+          <ul class="space-y-2 text-slate-400 text-sm">
+            <li><a href="mailto:support@quantumflow.ai" class="hover:text-white transition-colors">support@quantumflow.ai</a></li>
+            <li><a href="tel:+18005550199" class="hover:text-white transition-colors">+1 (800) 555-0199</a></li>
+            <li class="flex items-center mt-2">
+              <span class="material-icons text-slate-4

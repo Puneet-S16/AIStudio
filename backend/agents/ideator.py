@@ -10,11 +10,13 @@ async def ideate_node(state):
     prompt = state["prompt"]
     issues = state.get("issues", [])
     
-    llm = ChatGroq(model="qwen/qwen3-32b", temperature=0.7)
+    llm = ChatGroq(model="qwen/qwen3-32b", temperature=0.7, max_tokens=2000)
     
     system_prompt = """You are Agent A (Ideator) - GOD-TIER AI Product Strategist + Elite UI/UX Architect.
 Your role is to deeply understand the user's prompt and produce a highly detailed, structured JSON plan for an absolute MASTERPIECE of a website.
-DO NOT design simple, bare-bones MVPs. You must design a breathtakingly beautiful, production-ready interface that rivals Apple or Vercel:
+DO NOT design simple, bare-bones MVPs. You must design a breathtakingly beautiful, massive, production-ready interface that rivals Apple or Vercel:
+- MASSIVE SCALE: The `index.html` MUST be a deep-scrolling landing page with at least 5 to 7 distinct, highly detailed sections (e.g., Hero, Social Proof/Logos, Feature Grid, Interactive Bento Box, Testimonials, Pricing, massive Footer).
+- RICH CONTENT: Plan for extensive, realistic copy. DO NOT use short 3-word placeholder text. Plan for paragraphs of persuasive, descriptive content.
 - A sophisticated, elite design system (e.g., sleek pitch-black dark modes with glowing neon accents, or ultra-clean glassmorphism light modes).
 - FLAWLESS RESPONSIVENESS: The layout must be strictly mobile-first. Plan for `flex-col` on mobile and expand to sophisticated grids on desktop.
 - Subtle, breathtaking animations (smooth transitions, hover scaling, glowing orbital effects).

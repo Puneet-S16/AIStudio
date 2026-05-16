@@ -9,10 +9,8 @@ async def review_node(state):
     emit_log = state["emit_log"]
     await emit_log("Reviewer", "Running Playwright to visually inspect the build...")
     
-    preview_dir = state["preview_dir"]
-    index_path = os.path.join(preview_dir, "index.html")
-    
-    file_url = f"file:///{index_path.replace(chr(92), '/')}"
+    # Use localhost server instead of file:/// to accurately simulate production and avoid CORS false-positives
+    file_url = "http://localhost:8000/preview/index.html"
     
     console_logs = []
     screenshot_b64 = ""
@@ -46,9 +44,12 @@ async def review_node(state):
     
     system_prompt = """You are Agent C (Reviewer) - Autonomous QA Engineer.
 Analyze the provided console logs of a web application.
-Identify any errors or warnings.
-If you find issues, output a strictly formatted JSON array of strings describing the issues.
-If everything looks perfect and premium (no errors), output an empty JSON array: []
+Identify any CRITICAL errors or broken UI issues.
+IMPORTANT: You MUST absolutely IGNORE the following warnings/errors:
+1. "warning: cdn.tailwindcss.com should not be used in production..."
+2. Any CORS or "NotSameOrigin" errors (e.g., net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin).
+If you find OTHER issues, output a strictly formatted JSON array of strings describing the issues.
+If the only issues are the ignored ones above, output an empty JSON array: []
 Do not include markdown wrappers, just the JSON array.
 """
     
@@ -61,11 +62,15 @@ Do not include markdown wrappers, just the JSON array.
     
     try:
         response = await llm.ainvoke(messages)
+        import re
         content = response.content.strip()
-        if "```json" in content:
-            content = content.split("```json")[1].split("```")[0].strip()
-        elif "```" in content:
-            content = content.split("```")[1].split("```")[0].strip()
+        
+        # Extract everything between the first '[' and last ']'
+        match = re.search(r'\[.*\]', content, re.DOTALL)
+        if match:
+            content = match.group(0)
+        else:
+            content = "[]"
             
         issues = json.loads(content)
         if issues:

@@ -46,17 +46,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     fileSelector.addEventListener('change', (e) => {
-        const type = e.target.value;
+        const filename = e.target.value;
+        const ext = filename.split('.').pop();
         const langMap = { 'html': 'html', 'css': 'css', 'js': 'javascript' };
         
         if (editor) {
-            monaco.editor.setModelLanguage(editor.getModel(), langMap[type]);
-            editor.setValue(currentCode[type] || '');
+            monaco.editor.setModelLanguage(editor.getModel(), langMap[ext] || 'html');
+            editor.setValue(currentCode.files && currentCode.files[filename] ? currentCode.files[filename] : '');
         }
     });
 
     refreshPreviewBtn.addEventListener('click', () => {
         previewIframe.src = previewIframe.src; // Reload
+    });
+
+    const newProjectBtn = document.getElementById('new-project-btn');
+    newProjectBtn.addEventListener('click', () => {
+        currentCode = { html: '', css: '', js: '', files: {} };
+        if (editor) editor.setValue('');
+        logsContainer.innerHTML = '<div class="log-entry system-log">Context cleared. Ready for a new project.</div>';
+        promptInput.value = '';
+        previewIframe.src = 'about:blank';
+        fileSelector.innerHTML = '<option value="html">index.html</option><option value="css">styles.css</option><option value="js">script.js</option>';
     });
 
     generateBtn.addEventListener('click', () => {
@@ -165,13 +176,32 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.type === 'log') {
                 appendLog(data.agent, data.text, data.details);
             } else if (data.type === 'code_update') {
-                currentCode.html = data.html || '';
-                currentCode.css = data.css || '';
-                currentCode.js = data.js || '';
-                
-                if (editor) {
-                    const type = fileSelector.value;
-                    editor.setValue(currentCode[type] || '');
+                if (data.files) {
+                    currentCode.files = data.files;
+                    
+                    // Update fileSelector dropdown
+                    fileSelector.innerHTML = '';
+                    for (const filename of Object.keys(currentCode.files)) {
+                        const opt = document.createElement('option');
+                        opt.value = filename;
+                        opt.textContent = filename;
+                        fileSelector.appendChild(opt);
+                    }
+                    
+                    if (editor) {
+                        const selectedFile = fileSelector.value;
+                        if (selectedFile) {
+                            const ext = selectedFile.split('.').pop();
+                            const langMap = { 'html': 'html', 'css': 'css', 'js': 'javascript' };
+                            monaco.editor.setModelLanguage(editor.getModel(), langMap[ext] || 'html');
+                            editor.setValue(currentCode.files[selectedFile] || '');
+                        }
+                    }
+                } else {
+                    // Legacy fallback
+                    currentCode.html = data.html || '';
+                    currentCode.css = data.css || '';
+                    currentCode.js = data.js || '';
                 }
             } else if (data.type === 'preview_reload') {
                 // cache buster to force reload
@@ -216,8 +246,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         entry.innerHTML = `
-            <strong>${agent}</strong>
-            ${text}
+            <span style="opacity:0.5; font-family:monospace; margin-right:8px;">></span>
+            <strong style="text-transform: uppercase; letter-spacing: 0.05em; margin-right: 6px;">[${agent}]</strong>
+            <span style="color: var(--text-main);">${text}</span>
             ${detailsHtml}
         `;
         logsContainer.appendChild(entry);

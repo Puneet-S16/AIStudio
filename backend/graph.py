@@ -19,6 +19,7 @@ class GraphState(TypedDict):
     # Callbacks for streaming UI
     emit_log: Callable[[str, str, Any], Awaitable[None]]
     emit_code: Callable[[str, str, str], Awaitable[None]]
+    emit_files: Callable[[Dict[str, str]], Awaitable[None]]
     emit_preview_reload: Callable[[], Awaitable[None]]
     preview_dir: str
 
@@ -32,7 +33,7 @@ def should_continue(state: GraphState):
         return "github_issue"
     return END
 
-async def run_generation_graph(prompt: str, current_code: Dict[str, str], emit_log, emit_code, emit_preview_reload, preview_dir: str):
+async def run_generation_graph(prompt: str, current_code: Dict[str, str], emit_log, emit_code, emit_files, emit_preview_reload, preview_dir: str):
     workflow = StateGraph(GraphState)
     
     workflow.add_node("ideator", ideate_node)
@@ -66,6 +67,7 @@ async def run_generation_graph(prompt: str, current_code: Dict[str, str], emit_l
         "max_iterations": 3,
         "emit_log": emit_log,
         "emit_code": emit_code,
+        "emit_files": emit_files,
         "emit_preview_reload": emit_preview_reload,
         "preview_dir": preview_dir
     }
